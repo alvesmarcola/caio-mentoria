@@ -1,6 +1,14 @@
+"use client";
+
+import { useSyncExternalStore } from "react";
 import { TrendingUp, ShieldAlert } from "lucide-react";
 
+const emptySubscribe = () => () => {};
+const getSnapshot = () => new Date().getFullYear();
+const getServerSnapshot = () => 2025;
+
 export function Footer() {
+  const year = useSyncExternalStore(emptySubscribe, getSnapshot, getServerSnapshot);
   return (
     <footer className="bg-[#081220] text-slate-400 py-12 md:py-16 border-t border-blue-950 text-xs">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -57,7 +65,7 @@ export function Footer() {
         {/* Bottom Copyright */}
         <div className="pt-6 border-t border-blue-900/40 flex flex-col sm:flex-row items-center justify-between gap-4 text-center sm:text-left text-[11px] text-slate-500">
           <p>
-            © {new Date().getFullYear()} Mentoria Caio Trade. Todos os direitos reservados.
+            © {year} Mentoria Caio Trade. Todos os direitos reservados.
           </p>
           <p>
             Desenvolvido para alta conversão e excelência operacional.
